@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Root to reuse||login</title>
+    <link rel="stylesheet" href="../styles/login.css" />
+    <link rel="icon" type="image/icon" href="../assets/denny-sammuel-mBXmmpDqp6c-unsplash.jpg " />
+</head>
+
+<body>
+    <div class="split-container">
+        <!-- LOGIN SIDE -->
+        <div class="form-panel login-panel">
+            <h2>Login</h2>
+            <div id="loginMessage"></div>
+
+            <div class="input-group">
+                <input type="text" id="loginUsername" placeholder="Username" required />
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="loginPassword" placeholder="Password" required />
+            </div>
+
+            <button class="btn btn-primary" onclick="handleLogin()">Login</button>
+
+            <div style="text-align: center; margin-top: 10px; font-size: 14px; color: #666;">
+                Admin: nara / nara
+            </div>
+
+            <a href="#" class="switch-link" onclick="switchToSignup()">Don't have an account? Sign Up</a>
+        </div>
+
+        <!-- SIGNUP SIDE -->
+        <div class="form-panel signup-panel">
+            <h2>Create Account</h2>
+            <div id="signupMessage"></div>
+
+            <div class="input-group">
+                <input type="text" id="signupUsername" placeholder="Username" required />
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="signupPassword" placeholder="Password" required />
+            </div>
+
+            <div class="input-group">
+                <input type="tel" id="signupPhone" placeholder="Phone Number" required />
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="signupEmail" placeholder="Email" required />
+            </div>
+
+            <button class="btn btn-primary" onclick="handleSignup()">Sign Up</button>
+            <button class="btn btn-secondary" onclick="switchToLogin()">Back to Login</button>
+
+            <div class="footer-text">"Remove the roots, reuse the wood."</div>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Panel switching logic
+        function switchPanels(isSignup) {
+            const loginPanel = document.querySelector('.login-panel');
+            const signupPanel = document.querySelector('.signup-panel');
+            if (isSignup) {
+                loginPanel.parentElement.classList.add('active-signup');
+                // You might need to adjust your CSS to handle .active-signup or just toggle visibility
+                loginPanel.style.display = 'none';
+                signupPanel.style.display = 'block';
+            } else {
+                loginPanel.parentElement.classList.remove('active-signup');
+                loginPanel.style.display = 'block';
+                signupPanel.style.display = 'none';
+            }
+        }
+
+        function switchToSignup() {
+            switchPanels(true);
+        }
+
+        function switchToLogin() {
+            switchPanels(false);
+        }
+
+        // Initialize display
+        document.addEventListener('DOMContentLoaded', () => {
+            switchToLogin();
+        });
+
+        // Allow Enter key to submit
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const active = document.activeElement;
+                if (active.closest('.login-panel')) {
+                    handleLogin();
+                } else if (active.closest('.signup-panel')) {
+                    handleSignup();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

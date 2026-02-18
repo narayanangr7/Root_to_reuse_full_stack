@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="../styles/common.css">
+  <link rel="stylesheet" href="../styles/cart.css">
+  <link rel="icon" type="image/icon" href="../assets/denny-sammuel-mBXmmpDqp6c-unsplash.jpg " />
+
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="../index.html" class="logo">🌲 Root to Reuse</a>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="./cart.html">Cart</a></li>
+        <li><a href="./camp_index.html">Events</a></li>
+        <li><a href="./bresh.html">Products category</a></li>
+        <li class="dropdown">
+          <a href="./Volunteer.html" class="dropbtn">Volunteer Section</a>
+
+        </li>
+        <li><a href="./login_page.html" class="login-btn" id="nav-auth-btn">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="header">
+      <h1>🛒 Shopping Cart</h1>
+      <p>Review your items and proceed to checkout</p>
+    </div>
+
+    <div class="cart-content">
+      <div class="cart-items">
+        <!-- Products will be loaded here dynamically by cart.js -->
+        <p>Loading cart items...</p>
+      </div>
+
+      <div class="cart-summary">
+        <div class="summary-title">Order Summary</div>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>₹0</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span>₹0</span>
+        </div>
+        <div class="summary-row">
+          <span>Tax</span>
+          <span>₹0</span>
+        </div>
+        <div class="summary-row">
+          <span>Total</span>
+          <span>₹0</span>
+        </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+        <a href="./bresh.html" class="continue-shopping"
+          style="display: block; text-align: center; margin-top: 15px;">Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+  <script src="../js/api.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,362 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(rgba(133, 199, 120, 0.8), rgba(247, 248, 247, 0.8));
+  min-height: 100vh;
+  color: #333;
+}
+
+
+/* Navigation styles moved to common.css */
+
+
+/* Hero Section - Responsive */
+.hero {
+  text-align: center;
+  padding: clamp(2rem, 5vw, 3rem) 2rem;
+}
+
+.hero h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: white;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  line-height: 1.3;
+}
+
+.hero p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Tabs - Responsive */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+}
+
+.tab {
+  padding: 0.875rem 2rem;
+  border-radius: 2rem;
+  border: none;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  min-width: 120px;
+  text-align: center;
+}
+
+.tab.active {
+  background-color: var(--tab-color, #4A7C29);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tab:not(.active) {
+  background-color: white;
+  color: #444;
+  border: 1px solid #eee;
+}
+
+.tab:hover:not(.active) {
+  border-color: #4A7C29;
+  color: #4A7C29;
+}
+
+/* Container - Responsive */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 2rem);
+}
+
+.info-card {
+  background-color: white;
+  border-radius: 1rem;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: #2d5016;
+  margin-bottom: 1rem;
+}
+
+.info-card p {
+  color: #666;
+  line-height: 1.6;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+/* Product Grid - Enhanced Responsive */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-bottom: 4rem;
+}
+
+@media (max-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.product-card {
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Product Images - Responsive */
+.product-image {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.1);
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #ff6347;
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  white-space: nowrap;
+}
+
+/* Product Content - Responsive */
+.product-content {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  color: #2d5016;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.product-description {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.price {
+  font-size: clamp(1.3rem, 4vw, 1.75rem);
+  color: #ff6347;
+  font-weight: 700;
+}
+
+.btn {
+  background-color: #4a7c29;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background-color: #3d6622;
+  transform: scale(1.05);
+}
+
+/* Tablet Breakpoint (992px) */
+@media (max-width: 992px) {
+
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .product-image {
+    height: 220px;
+  }
+
+  .tabs {
+    gap: 1rem;
+  }
+}
+
+/* Mobile Breakpoint (768px) */
+@media (max-width: 768px) {
+
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    flex-direction: column;
+  }
+
+  .tabs {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    max-width: 400px;
+    margin: 2rem auto;
+  }
+
+  .tab {
+    width: 100%;
+    padding: 1rem 2rem;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .product-image {
+    height: 200px;
+  }
+
+  .info-card {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Small Mobile Breakpoint (480px) */
+@media (max-width: 480px) {
+
+
+  .hero {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .tabs {
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .product-image {
+    height: 180px;
+  }
+
+  .product-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .badge {
+    padding: 0.4rem 1rem;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+/* Extra Small Screens (360px) */
+@media (max-width: 360px) {
+
+
+
+
+  /* Make hero section come first */
+  .hero {
+    order: 1;
+    padding: 1rem 0.5rem;
+  }
+
+  /* Make body use flex so order works */
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-image {
+    height: 160px;
+  }
+
+  .product-content {
+    padding: 0.75rem;
+  }
+
+  .info-card {
+    padding: 1rem;
+  }
+}

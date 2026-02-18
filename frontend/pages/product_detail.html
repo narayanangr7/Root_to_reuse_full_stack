@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details - Root to Reuse</title>
+    <link rel="stylesheet" href="../styles/common.css" />
+    <link rel="stylesheet" href="../styles/prodect_description.css" />
+    <link rel="icon" type="image/icon" href="../assets/denny-sammuel-mBXmmpDqp6c-unsplash.jpg " />
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="logo">🌲 Root to Reuse</a>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="./cart.html">Cart</a></li>
+                <li><a href="./camp_index.html">Events</a></li>
+                <li><a href="./bresh.html">Products category</a></li>
+                <li class="dropdown">
+                    <a href="./Volunteer.html" class="dropbtn">Volunteer Section</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <a href="./bresh.html" class="back-button">← Back to Catalogue</a>
+
+    <div class="container" id="product-detail-container">
+        <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading premium product details...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/api.js"></script>
+    <script src="../js/product_detail.js"></script>
+    <script src="../js/nav.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Root to Reuse</title>
+    <link rel="stylesheet" href="../styles/profile.css">
+</head>
+
+<body>
+    <div class="profile-container">
+        <div class="profile-card">
+            <header class="profile-header">
+                <a href="../index.html" class="back-home">← Home</a>
+                <div class="profile-avatar">👤</div>
+            </header>
+
+            <div class="profile-content">
+                <h2 id="display-username">Loading...</h2>
+
+                <div id="volunteer-status-container">
+                    <!-- Dynamic volunteer badge -->
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Username</label>
+                        <div class="value" id="info-username">-</div>
+                    </div>
+                    <div class="info-item">
+                        <label>Email Address</label>
+                        <div class="value" id="info-email">-</div>
+                    </div>
+                    <div class="info-item">
+                        <label>Phone Number</label>
+                        <div class="value" id="info-phone">-</div>
+                    </div>
+                    <div class="info-item">
+                        <label>Account ID</label>
+                        <div class="value" id="info-id">-</div>
+                    </div>
+                </div>
+
+                <div class="logout-container">
+                    <button class="btn-logout" id="logout-btn">Logout from Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/profile.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Root to Reuse - Karuvela Products</title>
+  <link rel="stylesheet" href="../styles/common.css" />
+  <link rel="stylesheet" href="../styles/prodect_firstpage.css" />
+  <link rel="icon" type="image/icon" href="../assets/denny-sammuel-mBXmmpDqp6c-unsplash.jpg " />
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="../index.html" class="logo">🌲 Root to Reuse</a>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="./cart.html">Cart</a></li>
+        <li><a href="./camp_index.html">Events</a></li>
+        <li><a href="./bresh.html">Products category</a></li>
+        <li class="dropdown">
+          <a href="./Volunteer.html" class="dropbtn">Volunteer Section</a>
+        </li>
+        <li><a href="./login_page.html" class="login-btn" id="nav-auth-btn">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>
+      <span class="hero-icon">🌳</span>
+      Karuvela Products
+    </h1>
+    <p>Premium Quality Prosopis Products for Your Needs</p>
+  </section>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchCategory(1)">Karuvela Tooth Brush</button>
+    <button class="tab" onclick="switchCategory(2)">Karuvela Firewood</button>
+    <button class="tab" onclick="switchCategory(3)">Karuvela Charcoal</button>
+  </div>
+
+  <div class="container">
+    <div class="info-card">
+      <h2>🪥 Karuvela Tooth Brush</h2>
+      <p>
+        Natural and organic tooth brushes made from authentic Karuvela wood.
+        Traditional oral care with medicinal properties for healthy teeth and
+        gums.
+      </p>
+    </div>
+
+    <div class="products-grid" id="products-container" data-category-id="1">
+      <div class="loading-state">
+        <p>Loading products...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/products.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camp Connect - Karuvela Removal Campaign</title>
+  <link rel="stylesheet" href="../styles/common.css" />
+  <link rel="stylesheet" href="../styles/event.css" />
+  <link rel="icon" type="image/icon" href="../assets/denny-sammuel-mBXmmpDqp6c-unsplash.jpg " />
+</head>
+
+<body>
+  <!-- Navigation -->
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="../index.html" class="logo">🌲 Root to Reuse</a>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="./cart.html">Cart</a></li>
+        <li><a href="./camp_index.html">Events</a></li>
+        <li><a href="./bresh.html">Products category</a></li>
+        <li class="dropdown">
+          <a href="./Volunteer.html" class="dropbtn">Volunteer Section</a>
+        </li>
+        <li><a href="./login_page.html" class="login-btn" id="nav-auth-btn">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header>
+    <h1>🌳 Camp Connect</h1>
+    <p>Karuvela (Babul) Tree Removal Campaign - Connect with Us</p>
+  </header>
+
+  <div class="container">
+    <div class="page-title">Connect with Our Campaign Camps</div>
+
+    <div class="camps-grid" id="camps-container">
+      <p>Loading events...</p>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/camps.js"></script>
+
+    <div class="contact-section">
+      <h2>Connect with a Camp</h2>
+      <p style="margin-bottom: 20px; color: #666;">Only Approved Volunteers can propose a new camp event.</p>
+      <form class="contact-form">
+        <div class="form-group full">
+          <label for="address">Event Name *</label>
+          <input type="text" id="Event" name="Event" placeholder="Enter your Event Name" required />
+        </div>
+        <div class="form-group full">
+          <label for="name">Full Name *</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+        </div>
+        <div class="form-group full">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+        </div>
+        <div class="form-group full">
+          <label for="Phone">Phone *</label>
+          <input type="text" id="Phone_no" name="Phone_no" placeholder="Enter your Phone number" required />
+        </div>
+        <div class="form-group full">
+          <label for="address">Address/Location *</label>
+          <input type="text" id="address" name="address" placeholder="Enter your full address" required />
+        </div>
+        <div class="form-group full">
+          <label for="Hours">Duration (Hours) *</label>
+          <input type="number" id="time" name="time" placeholder="Enter duration in hours" min="1" max="24" required />
+        </div>
+        <div class="form-group full">
+          <label for="date">Event Date *</label>
+          <input type="date" id="date" name="date" required />
+        </div>
+        <div class="form-group full">
+          <label for="message">Message/Description *</label>
+          <textarea id="message" name="message" placeholder="Describe the camp and goals..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn" style="width: 100%;">Submit Camp Proposal</button>
+      </form>
+    </div>
+
+    <div class="info-section">
+      <h3>Why Connect With Our Camps?</h3>
+      <div class="info-grid">
+        <div class="info-box">
+          <strong>📚 Get Information</strong>
+          <p>
+            Learn about the Karuvela removal process and environmental
+            benefits.
+          </p>
+        </div>
+        <div class="info-box">
+          <strong>🤝 Volunteer</strong>
+          <p>Join our team and contribute to the campaign in your area.</p>
+        </div>
+        <div class="info-box">
+          <strong>💡 Expert Advice</strong>
+          <p>
+            Get expert guidance on tree removal and ecosystem restoration.
+          </p>
+        </div>
+        <div class="info-box">
+          <strong>📊 Track Progress</strong>
+          <p>
+            Monitor the campaign progress in your region and nearby areas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>
+      &copy; 2025 Camp Connect - Karuvela Removal Campaign. Working Together
+      for a Greener Future.
+    </p>
+  </footer>
+  <script src="../js/nav.js"></script>
+</body>
+
+</html>

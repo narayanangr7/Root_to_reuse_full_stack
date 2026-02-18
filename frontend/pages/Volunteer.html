@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styles/common.css" />
+  <link rel="stylesheet" href="../styles/volunteer.css" />
+  <title>Root to Reuse - Sustainable Wood Products</title>
+  <link rel="icon" type="image/icon" href="../assets/denny-sammuel-mBXmmpDqp6c-unsplash.jpg " />
+</head>
+
+<body>
+  <!-- Navigation -->
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="../index.html" class="logo">🌲 Root to Reuse</a>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="./cart.html">Cart</a></li>
+        <li><a href="./camp_index.html">Events</a></li>
+        <li><a href="./bresh.html">Products category</a></li>
+        <li class="dropdown">
+          <a href="./Volunteer.html" class="dropbtn">Volunteer Section</a>
+        </li>
+        <li><a href="./login_page.html" class="login-btn" id="nav-auth-btn">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Volunteer Section -->
+  <section id="volunteer" class="volunteer">
+    <div class="volunteer-container">
+      <h2 class="section-title">Join Our Volunteer Team</h2>
+      <div class="volunteer-content">
+        <!-- Left Side -->
+        <div class="volunteer-info">
+          <h3>Make a Real Impact</h3>
+          <p>
+            Help us transform discarded tree roots into beautiful,
+            eco-friendly furniture. Every tree we save brings us closer to a
+            greener planet.
+          </p>
+          <p>
+            Our volunteers are the heart of our mission. Together, we're
+            creating sustainable products that make a difference for our
+            environment.
+          </p>
+
+          <div class="volunteer-benefits">
+            <h4>Why Volunteer With Us?</h4>
+            <ul>
+              <li>Hands-on experience in woodcraft and design</li>
+              <li>Join a community of environmental advocates</li>
+              <li>Flexible volunteer opportunities</li>
+              <li>Free training and mentorship</li>
+              <li>Recognition and certificates</li>
+              <li>Make a real environmental impact</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right Side - Registration Form -->
+        <div class="volunteer-form">
+          <h3>Register as Volunteer</h3>
+          <form id="volunteer-form">
+            <div class="form-group">
+              <label for="fullName">Full Name </label>
+              <input type="text" id="vol-name" name="fullName" placeholder="Enter your full name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address </label>
+              <input type="email" id="vol-email" name="email" placeholder="Enter your email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number </label>
+              <input type="tel" id="vol-phone" name="phone" placeholder="Enter your phone number" required />
+            </div>
+
+            <div class="form-group">
+              <label for="skills">Skills </label>
+              <input type="text" id="vol-skills" name="skills" placeholder="Enter your skills" required />
+            </div>
+
+            <div class="form-group">
+              <label for="age">Age </label>
+              <input type="number" id="vol-age" name="age" placeholder="Enter your age" min="18" required />
+            </div>
+
+            <div class="form-group">
+              <label for="city">City/Location </label>
+              <input type="text" id="vol-location" name="city" placeholder="Enter your city" required />
+            </div>
+
+            <button type="submit" class="submit-btn">Register Now</button>
+          </form>
+          <script src="../js/api.js"></script>
+          <script src="../js/volunteer.js"></script>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>About Us</h4>
+        <p>
+          Root to Reuse transforms discarded tree roots into beautiful,
+          sustainable furniture for a greener tomorrow.
+        </p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <p><a href="../pages/index.html">Home</a></p>
+      </div>
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p>Email: info@roottoreuse.com</p>
+        <p>Phone: +91 98765 43210</p>
+        <p>Location: Chennai, India</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Root to Reuse. All Rights Reserved.</p>
+      <p>Committed to sustainability and environmental conservation</p>
+    </div>
+  </footer>
+  <script src="../js/nav.js"></script>
+</body>
+
+</html>

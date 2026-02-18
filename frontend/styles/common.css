@@ -1,0 +1,173 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Navigation - Fully Responsive */
+.nav-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #6fc163af;
+    box-shadow: 0 2px 5px rgba(196, 191, 191, 0.1);
+    position: relative;
+    flex-wrap: wrap;
+    z-index: 100;
+}
+
+.logo {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    font-weight: bold;
+    color: #21c4238a;
+    text-decoration: none;
+    z-index: 10;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: rgb(52, 34, 19);
+    font-weight: 500;
+    padding: 10px 15px;
+    transition: color 0.3s, border 0.3s;
+    display: block;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.nav-links a:hover {
+    color: #172721;
+    border-bottom: 5px solid black;
+}
+
+.login-btn {
+    background: rgb(249, 253, 246);
+    color: #10c319;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.login-btn:hover {
+    background: #70fc4d;
+    color: rgb(19, 19, 19);
+    border: none;
+}
+
+/* Mobile Menu Toggle (Hidden by default) */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: rgb(52, 34, 19);
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 20;
+    padding: 5px;
+}
+
+/* Footer Styles (Common) */
+footer {
+    background-color: #2d5016;
+    color: white;
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+/* Responsive Design for Navigation */
+@media (max-width: 992px) {
+    .nav-container {
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        /* Hidden off-screen right */
+        height: 100vh;
+        width: 75%;
+        /* Covers most of screen */
+        background: #f0f7f0;
+        /* Light green background */
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 80px;
+        transition: right 0.3s ease-in-out;
+        z-index: 15;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        right: 0;
+        /* Slide in */
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        margin: 15px 0;
+    }
+
+    .nav-links a {
+        font-size: 1.2rem;
+        display: block;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .login-btn {
+        margin-top: 10px;
+        width: 80%;
+        display: inline-block;
+    }
+
+    footer {
+        padding: 1.5rem 1rem;
+    }
+}
+
+/* Small Mobile Breakpoint */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+}

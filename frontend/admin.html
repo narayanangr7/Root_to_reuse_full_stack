@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Root to Reuse</title>
+    <link rel="stylesheet" href="./admin_style.css">
+    
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>🌲 Root to Reuse</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item active" data-section="overview">Dashboard</li>
+                <li class="nav-item" data-section="categories">Categories</li>
+                <li class="nav-item" data-section="products">Manage Products</li>
+                <li class="nav-item" data-section="volunteers">Volunteer Requests</li>
+                <li class="nav-item" data-section="camps">Camp Requests</li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1 id="page-title">Dashboard Overview</h1>
+            </div>
+
+            <!-- Overview Section -->
+            <div id="section-overview" class="admin-page active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Products</h3>
+                        <p id="total-products">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Categories</h3>
+                        <p id="total-categories">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Orders Today</h3>
+                        <p>0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Volunteer Requests</h3>
+                        <p id="total-volunteers">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Camp Proposals</h3>
+                        <p id="total-camps">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Section -->
+            <div id="section-categories" class="admin-page">
+                <div class="section">
+                    <h2 class="section-title">Add New Category</h2>
+                    <form id="category-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Category Name</label>
+                                <input type="text" placeholder="Enter category name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Category Slug</label>
+                                <input type="text" placeholder="category-slug">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description (Content)</label>
+                            <textarea placeholder="Enter category description" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Add Category</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Products Section -->
+            <div id="section-products" class="admin-page">
+                <div class="section">
+                    <h2 class="section-title">Add New Product</h2>
+                    <form id="product-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Product Name *</label>
+                                <input type="text" placeholder="Enter product name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Category *</label>
+                                <select id="product-category-select" required>
+                                    <option value="">Select Category</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Price (₹) *</label>
+                                <input type="number" placeholder="0.00" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Product Type *</label>
+                                <input type="text" placeholder="e.g., Brush, Firewood, etc." required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Product Description *</label>
+                            <textarea placeholder="Enter detailed product description" required></textarea>
+                        </div>
+
+                        <div class="form-row-3">
+                            <div class="form-group">
+                                <label>Material</label>
+                                <input type="text" placeholder="e.g., Karuvelam wood">
+                            </div>
+                            <div class="form-group">
+                                <label>Length</label>
+                                <input type="text" placeholder="e.g., 15cm">
+                            </div>
+                            <div class="form-group">
+                                <label>Weight</label>
+                                <input type="text" placeholder="e.g., 50g">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Shelf Life</label>
+                                <input type="text" placeholder="e.g., 2 years">
+                            </div>
+                            <div class="form-group">
+                                <label>Usage</label>
+                                <input type="text" placeholder="e.g., Daily brushing">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Product Image URL</label>
+                            <input type="text" placeholder="https://example.com/image.jpg">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Add Product</button>
+                    </form>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Manage Products</h2>
+                    <div class="table-container">
+                        <table id="products-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Type</th>
+                                    <th>Material</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dynamic Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Volunteers Section -->
+            <div id="section-volunteers" class="admin-page">
+                <div class="volunteer-grid" id="volunteers-container">
+                    <!-- Dynamic Volunteer Cards -->
+                </div>
+            </div>
+
+            <!-- Camps Section -->
+            <div id="section-camps" class="admin-page">
+                <div class="volunteer-grid" id="camps-requests-container">
+                    <!-- Dynamic Camp Cards -->
+                </div>
+            </div>
+
+        </main>
+    </div>
+    <script src="./js/api.js"></script>
+    <script src="./js/admin.js"></script>
+</body>
+
+</html>
