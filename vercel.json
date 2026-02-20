@@ -13,11 +13,11 @@
             "use": "@vercel/static"
         },
         {
-            "src": "frontend/**",
+            "src": "style.css",
             "use": "@vercel/static"
         },
         {
-            "src": "style.css",
+            "src": "frontend/**",
             "use": "@vercel/static"
         }
     ],
@@ -27,8 +27,20 @@
             "dest": "/api/index.py"
         },
         {
-            "src": "/frontend/(.*)",
-            "dest": "/frontend/$1"
+            "src": "/pages/(.*)",
+            "dest": "/frontend/pages/$1"
+        },
+        {
+            "src": "/js/(.*)",
+            "dest": "/frontend/js/$1"
+        },
+        {
+            "src": "/styles/(.*)",
+            "dest": "/frontend/styles/$1"
+        },
+        {
+            "src": "/assets/(.*)",
+            "dest": "/frontend/assets/$1"
         },
         {
             "src": "/style.css",
