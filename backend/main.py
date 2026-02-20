@@ -11,11 +11,11 @@ from routers.volunteer_router import router as volunteer_router
 from routers.camp_router import router as camp_router
 from routers.cart_routers import router as cart_routers
 from routers.order_router import router as order_router
-from models.camp_participant_model import CampParticipant
 
+# Initialize FastAPI with the /api root path for production routing
 app = FastAPI(title="Root to Reuse API", root_path="/api")
 
-# 1. CORS — wildcard so the Vercel-hosted frontend can call the serverless backend
+# CORS Configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -24,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 2. GLOBAL ERROR DEBUGGER
+# Global Exception Handler
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     print(f"BACKEND CRITICAL ERROR: {exc}")
@@ -34,18 +34,18 @@ async def global_exception_handler(request: Request, exc: Exception):
         headers={"Access-Control-Allow-Origin": "*"}
     )
 
-# 3. DB INIT
-Base.metadata.create_all(bind=engine)
+# Database Initialization
+try:
+    Base.metadata.create_all(bind=engine)
+except Exception as e:
+    print(f"Database initialization skipped or failed: {e}")
 
-# 4. Health-check — reachable at /api/health in production, /health locally
+# Health-check Endpoint
 @app.get("/health")
 async def health_check():
     return {"status": "ok", "message": "Root to Reuse API is running"}
 
-# 5. ROUTES — prefixes come from each router (e.g. /products, /users, etc.)
-#    In local dev  → http://localhost:8000/products/
-#    In production → https://your-site.vercel.app/api/products/
-#    The JS api.js uses baseUrl="" locally and "/api" on Vercel, so paths always match.
+# Include Routers
 app.include_router(prodect_router)
 app.include_router(user_router)
 app.include_router(catagory_router)
