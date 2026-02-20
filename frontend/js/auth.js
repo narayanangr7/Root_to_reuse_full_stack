@@ -31,9 +31,9 @@ async function handleLogin() {
 
         // Redirect based on role
         if (response.username === 'nara' || response.username === 'demoadmin') {
-            window.location.href = '../admin.html';
+            window.location.href = '/admin.html';
         } else {
-            window.location.href = '../index.html';
+            window.location.href = '/index.html';
         }
 
     } catch (error) {

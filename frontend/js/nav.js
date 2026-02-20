@@ -26,10 +26,10 @@ function updateNav() {
         // User is logged in
         if (username === 'nara' || username === 'demoadmin') {
             authBtn.textContent = 'Admin Dashboard';
-            authBtn.href = window.location.pathname.includes('/pages/') ? '../admin.html' : './admin.html';
+            authBtn.href = '/admin.html';
         } else {
             authBtn.textContent = 'My Profile';
-            authBtn.href = window.location.pathname.includes('/pages/') ? './profile.html' : './pages/profile.html';
+            authBtn.href = '/pages/profile.html';
         }
 
         // Optional: Add styling to indicate active session

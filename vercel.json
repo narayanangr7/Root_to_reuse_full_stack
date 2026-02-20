@@ -8,52 +8,36 @@
                 "maxLambdaSize": "15mb",
                 "runtime": "python3.9"
             }
-        },
-        {
-            "src": "index.html",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "style.css",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "frontend/**",
-            "use": "@vercel/static"
         }
     ],
-    "routes": [
+    "rewrites": [
         {
-            "src": "/api/(.*)",
-            "dest": "/api/index.py"
+            "source": "/api/(.*)",
+            "destination": "/api/index.py"
         },
         {
-            "src": "/pages/(.*)",
-            "dest": "/frontend/pages/$1"
+            "source": "/admin.html",
+            "destination": "/frontend/pages/admin.html"
         },
         {
-            "src": "/js/(.*)",
-            "dest": "/frontend/js/$1"
+            "source": "/login_page.html",
+            "destination": "/frontend/pages/login_page.html"
         },
         {
-            "src": "/styles/(.*)",
-            "dest": "/frontend/styles/$1"
+            "source": "/pages/(.*)",
+            "destination": "/frontend/pages/$1"
         },
         {
-            "src": "/assets/(.*)",
-            "dest": "/frontend/assets/$1"
+            "source": "/js/(.*)",
+            "destination": "/frontend/js/$1"
         },
         {
-            "src": "/style.css",
-            "dest": "/style.css"
+            "source": "/styles/(.*)",
+            "destination": "/frontend/styles/$1"
         },
         {
-            "src": "/(.*\\.(js|css|html|jpg|png|svg|ico|webp|gif|json|woff|woff2|ttf|eot))",
-            "dest": "/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/index.html"
+            "source": "/assets/(.*)",
+            "destination": "/frontend/assets/$1"
         }
     ]
 }
