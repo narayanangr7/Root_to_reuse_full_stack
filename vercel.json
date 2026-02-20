@@ -8,6 +8,18 @@
                 "maxLambdaSize": "15mb",
                 "runtime": "python3.9"
             }
+        },
+        {
+            "src": "index.html",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "style.css",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "frontend/**",
+            "use": "@vercel/static"
         }
     ],
     "rewrites": [
