@@ -13,26 +13,12 @@ from routers.cart_routers import router as cart_routers
 from routers.order_router import router as order_router
 from models.camp_participant_model import CampParticipant
 
-app = FastAPI(title="Root to Reuse API")
+app = FastAPI(title="Root to Reuse API", root_path="/api")
 
-# 1. CORS — allow localhost (dev) + any Vercel deployment (production)
-allowed_origins = [
-    "http://localhost:3000",
-    "http://localhost:5500",
-    "http://127.0.0.1:5500",
-    "http://127.0.0.1:8000",
-    # Allow all Vercel domains for this project
-    "https://narayanangr7.vercel.app",
-]
-
-# Also support a custom domain set via env variable (e.g. https://roottoreuse.com)
-custom_origin = os.getenv("FRONTEND_ORIGIN")
-if custom_origin:
-    allowed_origins.append(custom_origin)
-
+# 1. CORS — wildcard so the Vercel-hosted frontend can call the serverless backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # Keep wildcard so the static frontend served by Vercel works seamlessly
+    allow_origins=["*"],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -51,12 +37,15 @@ async def global_exception_handler(request: Request, exc: Exception):
 # 3. DB INIT
 Base.metadata.create_all(bind=engine)
 
-# 4. Health-check (Vercel pings this to verify the function is alive)
-@app.get("/api")
+# 4. Health-check — reachable at /api/health in production, /health locally
+@app.get("/health")
 async def health_check():
     return {"status": "ok", "message": "Root to Reuse API is running"}
 
-# 5. ROUTES
+# 5. ROUTES — prefixes come from each router (e.g. /products, /users, etc.)
+#    In local dev  → http://localhost:8000/products/
+#    In production → https://your-site.vercel.app/api/products/
+#    The JS api.js uses baseUrl="" locally and "/api" on Vercel, so paths always match.
 app.include_router(prodect_router)
 app.include_router(user_router)
 app.include_router(catagory_router)

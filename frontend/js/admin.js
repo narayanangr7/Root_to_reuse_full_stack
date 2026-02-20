@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = localStorage.getItem('username');
     if (username !== 'nara' && username !== 'demoadmin') {
         alert('Admin access only!');
-        window.location.href = './pages/login_page.html';
+        window.location.href = './login_page.html';
         return;
     }
 
