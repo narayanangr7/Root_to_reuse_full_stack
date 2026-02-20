@@ -1,6 +1,12 @@
 class ApiService {
-    constructor(baseUrl = 'http://127.0.0.1:8000') {
-        this.baseUrl = baseUrl;
+    constructor() {
+        // In production (Vercel), use relative /api path so Vercel routes it to the serverless function.
+        // In local development, fall back to localhost:8000.
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            this.baseUrl = 'http://127.0.0.1:8000';
+        } else {
+            this.baseUrl = '/api';
+        }
     }
 
     async request(endpoint, method = 'GET', body = null, requiresAuth = false) {
