@@ -8,7 +8,7 @@ load_dotenv()
 
 # Email Configuration
 SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp.gmail.com")
-SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
+SMTP_PORT = int(os.getenv("SMTP_PORT", "465"))
 SMTP_USER = os.getenv("SMTP_USER", "")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
 FROM_EMAIL = os.getenv("FROM_EMAIL", SMTP_USER)
@@ -34,12 +34,26 @@ def send_email(to_email: str, subject: str, body: str):
         msg['Subject'] = subject
         msg.attach(MIMEText(body, 'plain'))
 
-        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-        server.starttls()
-        server.login(SMTP_USER, SMTP_PASSWORD)
-        server.send_message(msg)
-        server.quit()
+        # Try SSL on port 465 first (more firewall-friendly)
+        try:
+            with smtplib.SMTP_SSL(SMTP_SERVER, 465, timeout=10) as server:
+                server.login(SMTP_USER, SMTP_PASSWORD)
+                server.send_message(msg)
+            print(f"Email sent successfully to {to_email} via SSL (port 465)")
+            return True
+        except Exception as ssl_err:
+            print(f"SSL attempt failed: {ssl_err}. Trying STARTTLS on port 587...")
+
+        # Fallback: Try STARTTLS on port 587
+        with smtplib.SMTP(SMTP_SERVER, 587, timeout=10) as server:
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
+            server.login(SMTP_USER, SMTP_PASSWORD)
+            server.send_message(msg)
+        print(f"Email sent successfully to {to_email} via STARTTLS (port 587)")
         return True
+
     except Exception as e:
         print("\n" + "!"*50)
         print(f"EMAIL ERROR: Failed to send email to {to_email}")
