@@ -34,29 +34,45 @@ def send_email(to_email: str, subject: str, body: str):
         msg['Subject'] = subject
         msg.attach(MIMEText(body, 'plain'))
 
-        # Try SSL on port 465 first (more firewall-friendly)
-        try:
-            with smtplib.SMTP_SSL(SMTP_SERVER, 465, timeout=10) as server:
-                server.login(SMTP_USER, SMTP_PASSWORD)
-                server.send_message(msg)
-            print(f"Email sent successfully to {to_email} via SSL (port 465)")
-            return True
-        except Exception as ssl_err:
-            print(f"SSL attempt failed: {ssl_err}. Trying STARTTLS on port 587...")
+        # Ports to try: 587 (most common for cloud), then 465
+        # Port 587 is generally preferred on Vercel and other cloud platforms.
+        ports_to_try = [587, 465]
+        
+        # If the user explicitly set a port via env, try that first
+        if SMTP_PORT not in ports_to_try:
+            ports_to_try.insert(0, SMTP_PORT)
 
-        # Fallback: Try STARTTLS on port 587
-        with smtplib.SMTP(SMTP_SERVER, 587, timeout=10) as server:
-            server.ehlo()
-            server.starttls()
-            server.ehlo()
-            server.login(SMTP_USER, SMTP_PASSWORD)
-            server.send_message(msg)
-        print(f"Email sent successfully to {to_email} via STARTTLS (port 587)")
-        return True
+        # Remove duplicates
+        ports_to_try = list(dict.fromkeys(ports_to_try))
+
+        for port in ports_to_try:
+            try:
+                print(f"[DEBUG] Attempting to send email via {SMTP_SERVER} on port {port}...")
+                if port == 465:
+                    with smtplib.SMTP_SSL(SMTP_SERVER, port, timeout=5) as server:
+                        server.login(SMTP_USER, SMTP_PASSWORD)
+                        server.send_message(msg)
+                else:
+                    with smtplib.SMTP(SMTP_SERVER, port, timeout=5) as server:
+                        server.ehlo()
+                        server.starttls()
+                        server.ehlo()
+                        server.login(SMTP_USER, SMTP_PASSWORD)
+                        server.send_message(msg)
+                
+                print(f"Email sent successfully to {to_email} via port {port}")
+                return True
+            except Exception as e:
+                print(f"Attempt via port {port} failed: {e}")
+                continue
+
+        # If we got here, all attempts failed
+        print(f"ERROR: All SMTP connection attempts failed for {to_email}")
+        return False
 
     except Exception as e:
         print("\n" + "!"*50)
-        print(f"EMAIL ERROR: Failed to send email to {to_email}")
+        print(f"EMAIL ERROR: Critical failure sending email to {to_email}")
         print(f"Details: {str(e)}")
         print("!"*50 + "\n")
         return False

@@ -76,8 +76,8 @@ def approve_volunteer(volunteer_id: int, background_tasks: BackgroundTasks, db: 
 
     # Send Approval Email
     if volunteer.email:
-        print(f"[DEBUG] Queueing approval email for {volunteer.email}")
-        background_tasks.add_task(send_volunteer_approval_email, volunteer.email, volunteer.full_name)
+        print(f"[DEBUG] Sending approval email for {volunteer.email}...")
+        send_volunteer_approval_email(volunteer.email, volunteer.full_name)
     else:
         print("[DEBUG] No email found for volunteer, skipping notification.")
 

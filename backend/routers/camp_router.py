@@ -105,7 +105,7 @@ def join_camp(camp_id: int, username: str, background_tasks: BackgroundTasks, db
     # Send Joined Email
     if volunteer.email:
         organizer_name = camp.volunteer.full_name if camp.volunteer else "the admin"
-        background_tasks.add_task(send_camp_joined_email, volunteer.email, volunteer.full_name, camp.event_name, organizer_name)
+        send_camp_joined_email(volunteer.email, volunteer.full_name, camp.event_name, organizer_name)
     
     return {"message": "Joined successfully!"}
 
@@ -122,7 +122,7 @@ def approve_camp(camp_id: int, background_tasks: BackgroundTasks, db: Session = 
 
     # Send Approval Email to the organizer (camp owner)
     if camp.email:
-        background_tasks.add_task(send_camp_approval_email, camp.email, camp.full_name, camp.event_name)
+        send_camp_approval_email(camp.email, camp.full_name, camp.event_name)
 
     return camp
 
