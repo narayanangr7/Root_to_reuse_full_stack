@@ -11,6 +11,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sidebar Navigation Logic
     setupNavigation();
 
+    // Logout Logic
+    const logoutBtn = document.getElementById('admin-logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.clear();
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            window.location.href = isLocal ? '/index.html' : '/index.html';
+        });
+    }
+
     // Initial Load
     loadStats();
     loadVolunteers();

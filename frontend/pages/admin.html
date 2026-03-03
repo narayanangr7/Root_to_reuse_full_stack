@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Root to Reuse</title>
-    <link rel="stylesheet" href="../styles/admin_style.css">
-    
+    <link rel="stylesheet" href="/frontend/styles/admin_style.css">
+
 </head>
 
 <body>
@@ -22,6 +22,15 @@
                 <li class="nav-item" data-section="products">Manage Products</li>
                 <li class="nav-item" data-section="volunteers">Volunteer Requests</li>
                 <li class="nav-item" data-section="camps">Camp Requests</li>
+                <li class="nav-item"
+                    style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                    <a href="/index.html" style="color: white; text-decoration: none; display: block;">🏠 Back to
+                        Home</a>
+                </li>
+                <li class="nav-item" style="margin-top: 10px; cursor: pointer;">
+                    <a id="admin-logout-btn" style="color: #ff4757; text-decoration: none; display: block;">🚪
+                        Logout</a>
+                </li>
             </ul>
         </aside>
 
@@ -188,8 +197,8 @@
 
         </main>
     </div>
-    <script src="../js/api.js"></script>
-    <script src="../js/admin.js"></script>
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/admin.js"></script>
 </body>
 
 </html>

@@ -21,15 +21,16 @@ function updateNav() {
     if (!authBtn) return;
 
     const username = localStorage.getItem('username');
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
     if (username) {
         // User is logged in
         if (username === 'nara' || username === 'demoadmin') {
             authBtn.textContent = 'Admin Dashboard';
-            authBtn.href = '/admin.html';
+            authBtn.href = isLocal ? '/frontend/pages/admin.html' : '/admin.html';
         } else {
             authBtn.textContent = 'My Profile';
-            authBtn.href = '/pages/profile.html';
+            authBtn.href = isLocal ? '/frontend/pages/profile.html' : '/pages/profile.html';
         }
 
         // Optional: Add styling to indicate active session
@@ -38,6 +39,10 @@ function updateNav() {
     } else {
         // User is logged out
         authBtn.textContent = 'Login';
-        authBtn.href = window.location.pathname.includes('/pages/') ? './login_page.html' : './pages/login_page.html';
+        if (isLocal) {
+            authBtn.href = window.location.pathname.includes('/pages/') ? './login_page.html' : './frontend/pages/login_page.html';
+        } else {
+            authBtn.href = window.location.pathname.includes('/pages/') ? './login_page.html' : './pages/login_page.html';
+        }
     }
 }

@@ -3,24 +3,42 @@ import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
+from pathlib import Path
 
-load_dotenv()
+# Load .env from backend directory explicitly
+env_path = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
 
-# Email Configuration
-SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp.gmail.com")
+# Email Configuration - strip whitespace/quotes to avoid hidden chars
+SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp.gmail.com").strip().strip('"').strip("'")
 SMTP_PORT = int(os.getenv("SMTP_PORT", "465"))
-SMTP_USER = os.getenv("SMTP_USER", "")
-SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
-FROM_EMAIL = os.getenv("FROM_EMAIL", SMTP_USER)
+SMTP_USER = os.getenv("SMTP_USER", "").strip().strip('"').strip("'")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "").strip().strip('"').strip("'")
+FROM_EMAIL = os.getenv("FROM_EMAIL", SMTP_USER).strip().strip('"').strip("'")
+
+# Debug: Print loaded credentials at startup (masked password)
+print(f"[EMAIL CONFIG] .env path: {env_path} (exists: {env_path.exists()})")
+print(f"[EMAIL CONFIG] SMTP_SERVER: '{SMTP_SERVER}'")
+print(f"[EMAIL CONFIG] SMTP_PORT: {SMTP_PORT}")
+print(f"[EMAIL CONFIG] SMTP_USER: '{SMTP_USER}'")
+print(f"[EMAIL CONFIG] SMTP_PASSWORD: '{SMTP_PASSWORD[:4]}****' (length: {len(SMTP_PASSWORD)})")
+print(f"[EMAIL CONFIG] FROM_EMAIL: '{FROM_EMAIL}'")
 
 def send_email(to_email: str, subject: str, body: str):
     """
     Sends an email using SMTP.
-    If credentials are missing, it just prints the email to console (Mock mode).
+    If credentials are missing on Vercel, it returns False.
+    On local, it prints to console (Mock mode).
     """
+    is_vercel = os.getenv("VERCEL") == "1"
+    
     if not SMTP_USER or not SMTP_PASSWORD:
+        if is_vercel:
+            print("[ERROR] SMTP credentials missing in Vercel environment variables!")
+            return False
+        
         print("\n" + "="*50)
-        print("MOCK EMAIL SENT (Credentials missing in .env)")
+        print("MOCK EMAIL SENT (Local Environment)")
         print(f"To: {to_email}")
         print(f"Subject: {subject}")
         print(f"Body: {body}")
@@ -34,46 +52,52 @@ def send_email(to_email: str, subject: str, body: str):
         msg['Subject'] = subject
         msg.attach(MIMEText(body, 'plain'))
 
-        # Ports to try: 587 (most common for cloud), then 465
-        # Port 587 is generally preferred on Vercel and other cloud platforms.
-        ports_to_try = [587, 465]
+        # Ports to try: 465 (SSL, usually unblocked) then 587 (STARTTLS)
+        ports_to_try = [465, 587]
         
-        # If the user explicitly set a port via env, try that first
-        if SMTP_PORT not in ports_to_try:
+        # If the user explicitly set a different port, try that first
+        if SMTP_PORT not in ports_to_try and SMTP_PORT != 0:
             ports_to_try.insert(0, SMTP_PORT)
 
         # Remove duplicates
         ports_to_try = list(dict.fromkeys(ports_to_try))
 
+        success = False
+        last_error = "No ports attempted"
+
         for port in ports_to_try:
             try:
-                print(f"[DEBUG] Attempting to send email via {SMTP_SERVER} on port {port}...")
-                if port == 465:
-                    with smtplib.SMTP_SSL(SMTP_SERVER, port, timeout=5) as server:
-                        server.login(SMTP_USER, SMTP_PASSWORD)
-                        server.send_message(msg)
-                else:
-                    with smtplib.SMTP(SMTP_SERVER, port, timeout=5) as server:
-                        server.ehlo()
-                        server.starttls()
-                        server.ehlo()
-                        server.login(SMTP_USER, SMTP_PASSWORD)
-                        server.send_message(msg)
+                print(f"[DEBUG] SMTP: Attempting port {port} on {SMTP_SERVER}...")
                 
-                print(f"Email sent successfully to {to_email} via port {port}")
-                return True
+                if port == 465:
+                    # Pure SSL
+                    server = smtplib.SMTP_SSL(SMTP_SERVER, port, timeout=4)
+                else:
+                    # Normal or STARTTLS
+                    server = smtplib.SMTP(SMTP_SERVER, port, timeout=4)
+                    if port == 587:
+                        server.starttls()
+                
+                server.login(SMTP_USER, SMTP_PASSWORD)
+                # Use sendmail for wider compatibility with older smtplib versions if needed
+                server.sendmail(FROM_EMAIL, to_email, msg.as_string())
+                server.quit()
+                
+                print(f"[SUCCESS] Email sent to {to_email} via port {port}")
+                success = True
+                break
             except Exception as e:
-                print(f"Attempt via port {port} failed: {e}")
+                last_error = str(e)
+                print(f"[WARNING] SMTP attempt via port {port} failed: {last_error}")
                 continue
 
-        # If we got here, all attempts failed
-        print(f"ERROR: All SMTP connection attempts failed for {to_email}")
-        return False
+        if not success:
+            print(f"[ERROR] All SMTP ports failed. Last error: {last_error}")
+        return success
 
     except Exception as e:
         print("\n" + "!"*50)
-        print(f"EMAIL ERROR: Critical failure sending email to {to_email}")
-        print(f"Details: {str(e)}")
+        print(f"CRITICAL EMAIL FAILURE: {str(e)}")
         print("!"*50 + "\n")
         return False
 

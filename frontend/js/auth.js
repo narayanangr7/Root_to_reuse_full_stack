@@ -30,10 +30,11 @@ async function handleLogin() {
         localStorage.setItem('user_phone', response.phone_no);
 
         // Redirect based on role
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         if (response.username === 'nara' || response.username === 'demoadmin') {
-            window.location.href = '/admin.html';
+            window.location.href = isLocal ? '/frontend/pages/admin.html' : '/admin.html';
         } else {
-            window.location.href = '/index.html';
+            window.location.href = isLocal ? '/index.html' : '/index.html';
         }
 
     } catch (error) {
